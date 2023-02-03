@@ -44,9 +44,16 @@ namespace AppSeries.ViewModels
             Serie = new Serie();
         }
 
-        private void ChangeWindow()
+        private async void ChangeWindow()
         {
+            //Series = await wSService.GetDevisesAsync("Series");
+
+            //foreach(Serie s in Series)
+            //    Console.WriteLine(s);
+
+
             App.rootFrame.Navigate(typeof(SeeAllSeries));
+
         }
 
         private async void PostSerie()
@@ -65,13 +72,6 @@ namespace AppSeries.ViewModels
         }
 
 
-        protected void OnPropertyChanged(string name)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
-            }
-        }
+        
     }
 }

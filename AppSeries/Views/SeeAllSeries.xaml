@@ -10,6 +10,22 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
+    <RelativePanel>
 
-    <RelativePanel />
+        <ComboBox
+            x:Name="ComboDevises"
+            Width="150"
+            Margin="0,10,0,0"
+            ItemsSource="{Binding Series, Mode=TwoWay}"
+            RelativePanel.AlignHorizontalCenterWithPanel="True"
+            RelativePanel.Below="TextDevise">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Titre, Mode=TwoWay}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+
+    </RelativePanel>
 </Page>
