@@ -34,7 +34,7 @@ namespace AppSeries.ViewModels
         public Serie Serie
         {
             get { return serie; }
-            set { serie = value; }
+            set { serie = value; OnPropertyChanged("Serie"); }
         }
 
         public AddSerieViewModel()
@@ -52,18 +52,15 @@ namespace AppSeries.ViewModels
         private async void PostSerie()
         {
 
-            List<Serie> series = await wSService.GetDevisesAsync("Series");
-            foreach (Serie s in series)
-                Console.WriteLine(s);
-            //try
-            //{
-            //    await wSService.PostAsync("series", Serie);
-            //    Console.WriteLine("oui");
-            //}
-            //catch
-            //{
-            //    Console.WriteLine("non");
-            //}
+            try
+            {
+                await wSService.PostAsync("series", Serie);
+                Serie = new();
+            }
+            catch
+            {
+                Console.WriteLine("non");
+            }
 
         }
 
