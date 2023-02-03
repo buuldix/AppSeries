@@ -35,7 +35,7 @@ namespace AppSeries
     {
 
         public static FrameworkElement MainRoot { get; private set; }
-
+        public static Frame rootFrame;
         public AddSerieViewModel AddSerieVM
         {
             get { return Ioc.Default.GetService<AddSerieViewModel>(); }
@@ -59,7 +59,7 @@ namespace AppSeries
         {
             m_window = new MainWindow();
 
-            Frame rootFrame = new Frame();
+            rootFrame = new Frame();
 
             m_window.Content = rootFrame;
 

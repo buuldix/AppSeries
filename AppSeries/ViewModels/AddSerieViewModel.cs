@@ -1,7 +1,9 @@
 ﻿using AppSeries.Models;
 using AppSeries.Services;
+using AppSeries.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.UI.Xaml;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +17,15 @@ namespace AppSeries.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public IRelayCommand BtnAdd { get; }
+        public IRelayCommand SeeAll { get; }
+
+        private List<Serie> series;
+
+        public List<Serie> Series
+        {
+            get { return series; }
+            set { series = value; }
+        }
 
         private WSService wSService = new ("https://localhost:44388/api/");
 
@@ -29,7 +40,13 @@ namespace AppSeries.ViewModels
         public AddSerieViewModel()
         {
             BtnAdd = new RelayCommand(PostSerie);
+            SeeAll = new RelayCommand(ChangeWindow);
             Serie = new Serie();
+        }
+
+        private void ChangeWindow()
+        {
+            App.rootFrame.Navigate(typeof(SeeAllSeries));
         }
 
         private async void PostSerie()
