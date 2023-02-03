@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation and Contributors.
 // Licensed under the MIT License.
 
+using AppSeries.Models;
+using AppSeries.Services;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -12,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -26,14 +29,26 @@ namespace AppSeries
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+
+        private WSService wSService;
         public MainWindow()
         {
             this.InitializeComponent();
+
+            wSService = new("https://localhost:44388/api/");
+
+            
         }
 
-        private void myButton_Click(object sender, RoutedEventArgs e)
+        private async void myButton_Click(object sender, RoutedEventArgs e)
         {
             myButton.Content = "Clicked";
+            Console.WriteLine("clické");
+            List<Serie> series = await wSService.GetDevisesAsync("Series");
+            Serie serie = await wSService.GetDeviseAsync("Series", 1);
+            foreach(Serie s in series)
+                Console.WriteLine(s);
+            Console.WriteLine(serie);
         }
     }
 }
