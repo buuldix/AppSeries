@@ -1,4 +1,5 @@
 ﻿using AppSeries.Models;
+using AppSeries.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
@@ -15,6 +16,7 @@ namespace AppSeries.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         public IRelayCommand BtnAdd { get; }
 
+        private WSService wSService = new ("https://localhost:44388/api/");
 
         private Serie serie;
 
@@ -30,9 +32,22 @@ namespace AppSeries.ViewModels
             Serie = new Serie();
         }
 
-        private void PostSerie()
+        private async void PostSerie()
         {
-            Console.WriteLine(Serie);
+
+            List<Serie> series = await wSService.GetDevisesAsync("Series");
+            foreach (Serie s in series)
+                Console.WriteLine(s);
+            //try
+            //{
+            //    await wSService.PostAsync("series", Serie);
+            //    Console.WriteLine("oui");
+            //}
+            //catch
+            //{
+            //    Console.WriteLine("non");
+            //}
+
         }
 
 
