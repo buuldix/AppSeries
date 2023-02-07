@@ -55,13 +55,17 @@ namespace AppSeries.ViewModels
 
         private async void DeleteSerie()
         {
+            Console.WriteLine("Deleting...");
             await wSService.DeleteAsync("Series", Serie.Serieid);
+            Console.WriteLine("Serie delete !");
             loadData();
         }
 
         private async void PutSerie()
         {
+            Console.WriteLine("Updating...");
             await wSService.PutAsync("Series", Serie);
+            Console.WriteLine("Serie Update !");
             loadData();
         }
 
