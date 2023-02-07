@@ -12,19 +12,129 @@
     mc:Ignorable="d">
     <RelativePanel>
 
+
+
+
         <ComboBox
-            x:Name="ComboDevises"
+            x:Name="ComboSeries"
             Width="150"
             Margin="0,10,0,0"
             ItemsSource="{Binding Series, Mode=TwoWay}"
             RelativePanel.AlignHorizontalCenterWithPanel="True"
-            RelativePanel.Below="TextDevise">
+            SelectedItem="{Binding Serie, Mode=TwoWay}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Titre, Mode=TwoWay}" />
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
+
+
+        <TextBlock
+            x:Name="TextTitre"
+            Margin="0,50,0,0"
+            RelativePanel.AlignHorizontalCenterWithPanel="True"
+            Text="Titre" />
+
+        <TextBox
+            x:Name="BindTitre"
+            Width="150"
+            Margin="0,10,0,0"
+            RelativePanel.AlignHorizontalCenterWithPanel="True"
+            RelativePanel.Below="TextTitre"
+            Text="{Binding Serie.Titre, Mode=TwoWay}" />
+
+
+        <TextBlock
+            x:Name="TextResume"
+            Margin="0,10,0,0"
+            RelativePanel.AlignHorizontalCenterWithPanel="True"
+            RelativePanel.Below="BindTitre"
+            Text="Resume" />
+        <TextBox
+            x:Name="BindResume"
+            Width="150"
+            Margin="0,10,0,0"
+            RelativePanel.AlignHorizontalCenterWithPanel="True"
+            RelativePanel.Below="TextResume"
+            Text="{Binding Serie.Resume, Mode=TwoWay}" />
+
+
+        <TextBlock
+            x:Name="TextNbSaisons"
+            Margin="0,10,0,0"
+            RelativePanel.AlignHorizontalCenterWithPanel="True"
+            RelativePanel.Below="BindResume"
+            Text="Nombre de saison" />
+        <TextBox
+            x:Name="BindNbSaisons"
+            Width="150"
+            Margin="0,10,0,0"
+            RelativePanel.AlignHorizontalCenterWithPanel="True"
+            RelativePanel.Below="TextNbSaisons"
+            Text="{Binding Serie.Nbsaisons, Mode=TwoWay}" />
+
+        <TextBlock
+            x:Name="TextNbepisodes"
+            Margin="0,10,0,0"
+            RelativePanel.AlignHorizontalCenterWithPanel="True"
+            RelativePanel.Below="BindNbSaisons"
+            Text="Nombre d'episode" />
+        <TextBox
+            x:Name="BindNbepisodes"
+            Width="150"
+            Margin="0,10,0,0"
+            RelativePanel.AlignHorizontalCenterWithPanel="True"
+            RelativePanel.Below="TextNbepisodes"
+            Text="{Binding Serie.Nbepisodes, Mode=TwoWay}" />
+
+
+        <TextBlock
+            x:Name="TextAnneecreation"
+            Margin="0,10,0,0"
+            RelativePanel.AlignHorizontalCenterWithPanel="True"
+            RelativePanel.Below="BindNbepisodes"
+            Text="Annee de creation" />
+        <TextBox
+            x:Name="BindAnneecreation"
+            Width="150"
+            Margin="0,10,0,0"
+            RelativePanel.AlignHorizontalCenterWithPanel="True"
+            RelativePanel.Below="TextAnneecreation"
+            Text="{Binding Serie.Anneecreation, Mode=TwoWay}" />
+
+        <TextBlock
+            x:Name="TextNetwork"
+            Margin="0,10,0,0"
+            RelativePanel.AlignHorizontalCenterWithPanel="True"
+            RelativePanel.Below="BindAnneecreation"
+            Text="Network" />
+        <TextBox
+            x:Name="BindNetwork"
+            Width="150"
+            Margin="0,10,0,0"
+            RelativePanel.AlignHorizontalCenterWithPanel="True"
+            RelativePanel.Below="TextNetwork"
+            Text="{Binding Serie.Network, Mode=TwoWay}" />
+
+        <Button
+            x:Name="EditButton"
+            Width="150"
+            Margin="0,10,0,0"
+            Command="{Binding EditButton}"
+            Content="Modifier"
+            RelativePanel.AlignHorizontalCenterWithPanel="True"
+            RelativePanel.Below="BindNetwork" />
+
+        <Button
+            x:Name="DeleteButton"
+            Width="150"
+            Margin="0,10,0,0"
+            Command="{Binding DeleteButton}"
+            Content="Supprimer"
+            RelativePanel.AlignHorizontalCenterWithPanel="True"
+            RelativePanel.Below="EditButton" />
+
 
 
     </RelativePanel>

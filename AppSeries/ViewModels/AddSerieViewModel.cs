@@ -18,10 +18,12 @@ namespace AppSeries.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         public IRelayCommand BtnAdd { get; }
         public IRelayCommand SeeAll { get; }
+        public IRelayCommand EditButton { get; }
+        public IRelayCommand DeleteButton { get; }
 
 
-        private WSService wSService = new ("https://apiseriesbubu.azurewebsites.net/api/");
-
+        //private WSService wSService = new ("https://apiseriesbubu.azurewebsites.net/api/");
+        private WSService wSService = new("https://localhost:44388/api/");
         private Serie serie;
 
         public Serie Serie
@@ -36,17 +38,31 @@ namespace AppSeries.ViewModels
         public List<Serie> Series
         {
             get { return series; }
-            set { series = value; }
+            set { series = value; OnPropertyChanged("Series"); }
         }
 
         public AddSerieViewModel()
         {
             BtnAdd = new RelayCommand(PostSerie);
             SeeAll = new RelayCommand(ChangeWindow);
+            EditButton = new RelayCommand(PutSerie);
+            DeleteButton = new RelayCommand(DeleteSerie);
             Serie = new Serie();
-            //Series = new List<Serie>();
-            //loadData();
+            Series = new List<Serie>();
+            loadData();
 
+        }
+
+        private async void DeleteSerie()
+        {
+            await wSService.DeleteAsync("Series", Serie.Serieid);
+            loadData();
+        }
+
+        private async void PutSerie()
+        {
+            await wSService.PutAsync("Series", Serie);
+            loadData();
         }
 
         private void ChangeWindow()
@@ -62,16 +78,15 @@ namespace AppSeries.ViewModels
             Console.WriteLine("loading...");
             Series = await wSService.GetDevisesAsync("Series");
 
-            if(Series == null)
+            if (Series == null)
                 Console.WriteLine("y a r");
-            //foreach (Serie serie in Series)
-            //    Console.WriteLine(serie);
+            else
+                Serie = Series[0];
 
         }
 
         private async void PostSerie()
         {
-
             try
             {
                 await wSService.PostAsync("series", Serie);
