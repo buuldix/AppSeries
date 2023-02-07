@@ -19,13 +19,6 @@ namespace AppSeries.ViewModels
         public IRelayCommand BtnAdd { get; }
         public IRelayCommand SeeAll { get; }
 
-        private List<Serie> series;
-
-        public List<Serie> Series
-        {
-            get { return series; }
-            set { series = value; }
-        }
 
         private WSService wSService = new ("https://apiseriesbubu.azurewebsites.net/api/");
 
@@ -37,22 +30,42 @@ namespace AppSeries.ViewModels
             set { serie = value; OnPropertyChanged("Serie"); }
         }
 
+
+        private List<Serie> series;
+
+        public List<Serie> Series
+        {
+            get { return series; }
+            set { series = value; }
+        }
+
         public AddSerieViewModel()
         {
             BtnAdd = new RelayCommand(PostSerie);
             SeeAll = new RelayCommand(ChangeWindow);
             Serie = new Serie();
+            //Series = new List<Serie>();
+            //loadData();
+
         }
 
-        private async void ChangeWindow()
+        private void ChangeWindow()
         {
-            //Series = await wSService.GetDevisesAsync("Series");
-
-            //foreach(Serie s in Series)
-            //    Console.WriteLine(s);
-
-
             App.rootFrame.Navigate(typeof(SeeAllSeries));
+
+
+
+        }
+
+        private async void loadData()
+        {
+            Console.WriteLine("loading...");
+            Series = await wSService.GetDevisesAsync("Series");
+
+            if(Series == null)
+                Console.WriteLine("y a r");
+            //foreach (Serie serie in Series)
+            //    Console.WriteLine(serie);
 
         }
 
