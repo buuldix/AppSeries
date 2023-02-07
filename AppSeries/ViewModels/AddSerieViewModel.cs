@@ -27,7 +27,7 @@ namespace AppSeries.ViewModels
             set { series = value; }
         }
 
-        private WSService wSService = new ("https://localhost:44388/api/");
+        private WSService wSService = new ("https://apiseriesbubu.azurewebsites.net/api/");
 
         private Serie serie;
 
